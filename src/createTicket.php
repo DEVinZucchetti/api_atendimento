@@ -27,7 +27,6 @@ if ($method === 'POST') {
     file_put_contents(ARQUIVO_FILA_ATENDIMENTO, json_encode($filaAtendimento));
 
     http_response_code(201);
+    sendEmail('emai@gmail.com', $name, 'TICKET CRIADO'); // Fila 
     echo json_encode(['message' => 'Aguarde sua vez !!!']);
-
-    sendEmail();
 }

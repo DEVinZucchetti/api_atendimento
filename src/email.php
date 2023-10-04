@@ -2,7 +2,7 @@
     // 1 - Carregar o autoload
      require_once '../vendor/autoload.php';
 
-     function sendEmail() {
+     function sendEmail($destinario, $nomeDestinatario, $subject) {
         $phpmailer = new PHPMailer\PHPMailer\PHPMailer();
 
         $phpmailer->isSMTP();
@@ -13,8 +13,8 @@
         $phpmailer->Password = 'd0eae85bc4a4c8';
 
         $phpmailer->setFrom('banco@gmail.com', 'Banco Meu Dinheiro');
-        $phpmailer->addAddress('henriquedouglas2803@gmail.com', 'Henrique Douglas');
-        $phpmailer->Subject = 'FEEDBACK SOBRE ATENDIMENTO';
+        $phpmailer->addAddress($destinario, $nomeDestinatario);
+        $phpmailer->Subject = $subject;
         $phpmailer->isHTML(true);
         $phpmailer->Body ='
         <html>
@@ -47,10 +47,5 @@
             </body>
         </html>';
 
-        if ($phpmailer->send()) {
-            echo "Email enviado com sucesso!";
-        } else {
-            echo "Erro ao enviar o email: " . $phpmailer->ErrorInfo;
-        }
-
+        $phpmailer->send();
      }
