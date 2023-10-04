@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'utils.php';
+require_once 'email.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -27,4 +28,6 @@ if ($method === 'POST') {
 
     http_response_code(201);
     echo json_encode(['message' => 'Aguarde sua vez !!!']);
+
+    sendEmail();
 }
