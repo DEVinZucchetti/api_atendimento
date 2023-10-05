@@ -16,6 +16,11 @@ if ($method === 'POST') {
     $fila = readFileContent(ARQUIVO_FILA_ATENDIMENTO);
 
     // exclui a pessoa do array de fila
+    if(count($fila) === 0) {
+        http_response_code(204);
+        exit;
+    }
+
     $primeiroItem =  array_shift($fila);
 
     saveFileContent(ARQUIVO_FILA_ATENDIMENTO, $fila);
@@ -38,5 +43,5 @@ if ($method === 'POST') {
     }
 
     http_response_code(201);
-    echo json_encode(['message' => 'Atendimento criado com sucesso']);
+    echo json_encode(['current' => $primeiroItem ]);
 }
